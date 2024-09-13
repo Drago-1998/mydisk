@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from back.mydisk.diskviewer import views as diskviewer_view
+from diskviewer.views import YandexDiskView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/yandex-disk/', diskviewer_view.YandexDiskView.as_view(), name='disk_viewer'),
+    path('api/v1/yandex-disk/', YandexDiskView.as_view(), name='disk_viewer'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

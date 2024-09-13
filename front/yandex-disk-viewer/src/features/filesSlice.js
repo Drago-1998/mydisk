@@ -1,6 +1,5 @@
-// src/features/filesSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios from "../axios";
 
 // Асинхронный thunk для получения файлов по публичной ссылке
 export const fetchFiles = createAsyncThunk('files/fetchFiles', async (publicLink, { rejectWithValue }) => {

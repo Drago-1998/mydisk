@@ -1,18 +1,22 @@
-// src/App.js
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import store from './app/store';
-import LinkInput from './components/LinkInput';
-import FileViewer from './components/FileViewer';
+import Login from './components/Login';
+import PrivateRoute from "./routes/PrivateRoute";
+import Main from "./components/Main";
 
 const App = () => {
     return (
         <Provider store={store}>
-            <div>
-                <h1>Просмотр файлов с Яндекс.Диска</h1>
-                <LinkInput />
-                <FileViewer />
-            </div>
+            <Router>
+                <div>
+                    <Routes>
+                        <Route path="/" element={<PrivateRoute component={Main} />} />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </div>
+            </Router>
         </Provider>
     );
 };
