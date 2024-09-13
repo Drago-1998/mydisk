@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-YANDEX_API_BASE_URL = "https://cloud-api.yandex.net/v1/disk/public/resources?public_key="
+from back.mydisk.mydisk.settings import YANDEX_TOKEN, YANDEX_API_BASE_URL
 
 
 class YandexDiskView(APIView):
@@ -20,7 +20,10 @@ class YandexDiskView(APIView):
             return Response({"error": "Invalid public link"}, status=status.HTTP_400_BAD_REQUEST)
 
         # Отправляем запрос к API Яндекс.Диска
-        response = requests.get(YANDEX_API_BASE_URL + public_key, headers={'Authorization': 'OAuth y0_AgAAAAAjVB8oAAxubQAAAAEQxSZtAADHnKHgk-5AiIwanw0FyxGFOyyCa'})
+        response = requests.get(
+            YANDEX_API_BASE_URL + public_key,
+            headers={'Authorization': f'OAuth {YANDEX_TOKEN}'}
+        )
         if response.status_code == 200:
             data = response.json()
             return Response(data)
