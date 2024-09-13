@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from back.mydisk.diskviewer import views as diskviewer_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/yandex-disk/', diskviewer_view.YandexDiskView.as_view(), name='disk_viewer'),
 ]
